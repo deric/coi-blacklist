@@ -1,5 +1,7 @@
 # ČOI / CTIA blacklist
 
+This repository contains a generated [hosts](https://github.com/deric/coi-blacklist/blob/main/hosts) file that can be used for DNS blocking.
+
 Entries in this list were currated by [The Czech Trade Inspection Authority (CTIA)](https://www.coi.cz/en/), which is an administrative government institution which falls under the jurisdiction of the Ministry of Industry and Trade of the Czech Republic.
 
 The list contains mostly websites on `.cz` domain that are considered to be harmful, mostly e-commerce sites connected to fraudelent actions.
