@@ -4,7 +4,7 @@ This repository contains a generated [hosts](https://github.com/deric/coi-blackl
 
 Entries in this list were currated by [The Czech Trade Inspection Authority (CTIA)](https://www.coi.cz/en/), which is an administrative government institution which falls under the jurisdiction of the Ministry of Industry and Trade of the Czech Republic.
 
-The list contains mostly websites on `.cz` domain that are considered to be harmful, mostly e-commerce sites connected to fraudelent actions.
+[The list](https://www.coi.cz/pro-spotrebitele/otevrena-data/rizikove-weby/) contains mostly websites on `.cz` domain that are considered to be harmful, mostly e-commerce sites connected to fraudelent actions.
 
 Each domain is redirected to `0.0.0.0` which should be [the fastest solution for blocking](https://github.com/StevenBlack/hosts#we-recommend-using-0000-instead-of-127001). The list is sorted alphabetically, nonetheless no other modifications are being made.
 
