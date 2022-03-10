@@ -18,6 +18,12 @@ https://raw.githubusercontent.com/deric/coi-blacklist/main/hosts
 ```
 2. Run `pihole -g` in order to update blacklists.
 
+## Usage
+
+See help, for modifying defaut values
+```
+$ ./src/update-coi -h
+```
 
 ## Related projects
 

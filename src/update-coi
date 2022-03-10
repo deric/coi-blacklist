@@ -2,11 +2,18 @@
 set -o errexit -o nounset -o pipefail
 set -e
 export LC_ALL=C
-#
 
 function -h {
   cat <<USAGE
-	Generates host file based on COI blacklist
+Generates host file based on COI blacklist
+
+    -u / --uri        URI where blacklist is fetched from, default: https://www.coi.cz/userdata/files/dokumenty-ke-stazeni/open-data/rizikove.csv
+    -e / --endline    Line-end character(s), on Linux '\\n'
+    -o / --output     Target file that will be overwritten, default: 'hosts' (in current directory)
+    -r / --redirect   Destination of blacklised URI, default: 0.0.0.0
+    -v / --verbose    Print each executed command
+    -h / --help       Print this help
+
 USAGE
 }; function --help { -h ;}
 
@@ -18,11 +25,15 @@ function main {
   local verbose=false
   local rs='\n'
   local uri="https://www.coi.cz/userdata/files/dokumenty-ke-stazeni/open-data/rizikove.csv"
+  local redirect="0.0.0.0"
+  local output="hosts"
   while [[ $# -gt 0 ]]
   do
     case "$1" in                                      # Munging globals, beware
       -u|--uri)            uri="$2"; shift 2 ;;
-      -r|--rs)             rs="$2"; shift 2 ;;
+      -e|--endline)        rs="$2"; shift 2 ;;
+      -o|--output)         output="$2"; shift 2 ;;
+      -r|--redirect)       redirect="$2"; shift 2 ;;
       -v|--verbose)        verbose=true; shift 1 ;;
       *)                    err 'Argument error. Please see help: -h' ;;
     esac
@@ -35,8 +46,8 @@ function main {
   mkdir -p ${workdir}
   curl -s --output ${workdir}/coi.csv ${uri}
   export num_entries=$(wc -l ${workdir}/coi.csv | awk '{print $1}')
-  envsubst < "$(pwd)/src/template" > hosts
-  cat ${workdir}/coi.csv | sort | awk -v RS=${rs} '{ printf "0.0.0.0 %s\n",$1 }' >> hosts
+  envsubst < "$(pwd)/src/template" > "${output}"
+  cat ${workdir}/coi.csv | sort | awk -v RS=${rs} '{ printf "'${redirect}' %s\n",$1 }' >> "${output}"
   rm -r "${workdir}"
 }
 
