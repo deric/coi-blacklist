@@ -1,4 +1,4 @@
 all: coi
 
 coi:
-	bash update-coi -v
+	bash src/update-coi -v

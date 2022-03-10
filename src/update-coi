@@ -35,7 +35,7 @@ function main {
   mkdir -p ${workdir}
   curl -s --output ${workdir}/coi.csv ${uri}
   export num_entries=$(wc -l ${workdir}/coi.csv | awk '{print $1}')
-  envsubst < "$(pwd)/template" > hosts
+  envsubst < "$(pwd)/src/template" > hosts
   cat ${workdir}/coi.csv | sort | awk -v RS=${rs} '{ printf "0.0.0.0 %s\n",$1 }' >> hosts
   rm -r "${workdir}"
 }
