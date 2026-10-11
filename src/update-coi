@@ -24,7 +24,7 @@ function err { local x=$? ; msg "$*" ; return $(( $x == 0 ? 1 : $x )) ;}
 function main {
   local verbose=false
   local rs='\n'
-  local uri="https://www.coi.cz/userdata/files/dokumenty-ke-stazeni/open-data/rizikove.csv"
+  local uri="https://www.coi.gov.cz/userdata/files/dokumenty-ke-stazeni/open-data/rizikove.csv"
   local redirect="0.0.0.0"
   local output="hosts"
   while [[ $# -gt 0 ]]
@@ -44,7 +44,7 @@ function main {
 
   local workdir="$(pwd)/tmp"
   mkdir -p ${workdir}
-  curl -s --output ${workdir}/coi.csv ${uri}
+  curl -L --output ${workdir}/coi.csv ${uri}
   export num_entries=$(wc -l ${workdir}/coi.csv | awk '{print $1}')
   envsubst < "$(pwd)/src/template" > "${output}"
   cat ${workdir}/coi.csv | sort | awk -v RS=${rs} '{ printf "'${redirect}' %s\n",$1 }' >> "${output}"
